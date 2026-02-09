@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이도형 (Dohyeong Lee)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.7;
+            background-color: #fff;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Profile */
+        .profile {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-photo .placeholder {
+            font-size: 14px;
+            color: #9ca3af;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .profile-info h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .name-en {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .profile-info .affiliation {
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .profile-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .profile-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #4b5563;
+            padding: 4px 0;
+        }
+
+        .profile-links a:hover {
+            color: #2563eb;
+        }
+
+        .profile-links .sep {
+            color: #d1d5db;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        section p {
+            font-size: 15px;
+            color: #374151;
+        }
+
+        /* Research Interests */
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .interests li {
+            background: #f3f4f6;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        /* Publications */
+        .pub-list {
+            list-style: none;
+        }
+
+        .pub-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .pub-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .pub-authors {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 2px;
+        }
+
+        .pub-venue {
+            font-size: 14px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .pub-links {
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        /* Item list (Education, Experience, etc.) */
+        .item-list {
+            list-style: none;
+        }
+
+        .item-list li {
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-list li + li {
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .item-desc {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .item-year {
+            font-size: 14px;
+            color: #9ca3af;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 13px;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-links {
+                justify-content: center;
+            }
+
+            .item-list li {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .item-year {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile">
+            <div class="profile-photo">
+                <!-- 프로필 사진: photo.jpg 파일을 같은 폴더에 넣고 아래 주석을 해제하세요 -->
+                <!-- <img src="photo.jpg" alt="이도형"> -->
+                <span class="placeholder">Photo</span>
+            </div>
+            <div class="profile-info">
+                <h1>이도형</h1>
+                <div class="name-en">Dohyeong Lee</div>
+                <div class="affiliation">
+                    인천대학교 정보통신공학과 4학년<br>
+                    <a href="https://sites.google.com/view/trustlab-inu/home" target="_blank">Trustworthy AI Lab</a> 학부 연구생
+                </div>
+                <div class="profile-links">
+                    <a href="mailto:eeshape@inu.ac.kr">Email</a>
+                    <span class="sep">|</span>
+                    <a href="https://github.com/eeshape" target="_blank">GitHub</a>
+                    <span class="sep">|</span>
+                    <a href="https://scholar.google.com/" target="_blank">Google Scholar</a>
+                    <span class="sep">|</span>
+                    <a href="/cv.pdf" target="_blank">CV</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 소개 -->
+        <section>
+            <h2>소개</h2>
+            <p>
+                인천대학교 정보통신공학과 4학년에 재학 중이며,
+                <strong>컴퓨터 비전(Computer Vision)</strong> 분야를 연구하고 있습니다.
+                주로 배포된 딥러닝 모델에서의 <strong>공정성(Fairness)</strong> 문제와
+                <strong>적대적 섭동(Adversarial Perturbation)</strong>을 활용한 편향 완화 기법에 관심을 두고 있습니다.
+            </p>
+            <p style="margin-top: 12px;">
+                <strong>IPIU 2026</strong>에서 포스터 발표를 마쳤으며, 현재 <strong>CVPR 2026 Workshop</strong> 논문 제출을 목표로
+                연구를 진행하고 있습니다. 연구 외에도 교내 <strong>GDSC(Google Developer Student Clubs)</strong> 챕터를
+                직접 창립하고 3년 연속 Lead를 맡아 개발자 커뮤니티를 운영해 왔습니다.
+            </p>
+        </section>
+
+        <!-- 연구 관심 분야 -->
+        <section>
+            <h2>연구 관심 분야</h2>
+            <ul class="interests">
+                <li>Computer Vision</li>
+                <li>Object Detection</li>
+                <li>Fairness in AI</li>
+                <li>Adversarial Perturbation</li>
+                <li>Deep Learning</li>
+            </ul>
+        </section>
+
+        <!-- 논문 -->
+        <section>
+            <h2>논문</h2>
+            <ul class="pub-list">
+                <li>
+                    <div class="pub-title">배포된 객체 탐지 모델에서 입력 섭동을 이용한 공정성 개선 기법</div>
+                    <div class="pub-authors"><u>이도형</u>*, 최서연*, 박성호&dagger;</div>
+                    <div class="pub-venue">IPIU 2026 (제38회 영상처리 및 이해에 관한 워크샵), 2026년 2월 | 포스터 발표</div>
+                    <div class="pub-links">
+                        <span style="font-size:12px; color:#9ca3af;">* 공동 제1저자 &nbsp; &dagger; 교신저자</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 학력 -->
+        <section>
+            <h2>학력</h2>
+            <ul class="item-list">
+                <li>
+                    <div>
+                        <div class="item-title">인천대학교 정보통신공학과</div>
+                        <div class="item-desc">학사 과정 (4학년 재학 중)</div>
+                    </div>
+                    <div class="item-year">2021 &ndash; 현재</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="item-title">한국디지털미디어고등학교 e-Business학과</div>
+                        <div class="item-desc"></div>
+                    </div>
+                    <div class="item-year">2017 &ndash; 2020</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 경력 및 활동 -->
+        <section>
+            <h2>경력 및 활동</h2>
+            <ul class="item-list">
+                <li>
+                    <div>
+                        <div class="item-title">GDSC / GDGoC 인천대학교 &mdash; Founder & Lead</div>
+                        <div class="item-desc">교내 GDSC 챕터를 최초 창립하고 3년 연속 Lead 역임.<br>주간 AI 세미나 운영, 500명 규모 컨퍼런스 및 해커톤 3회 이상 총괄.<br>Google 공식 Certificate of Participation 수료.</div>
+                    </div>
+                    <div class="item-year">2024 &ndash; 2026</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="item-title"><a href="https://sites.google.com/view/trustlab-inu/home" target="_blank">Trustworthy AI Lab</a>, 인천대학교 &mdash; 학부 연구생</div>
+                        <div class="item-desc">객체 탐지 공정성 연구 수행.<br>IPIU 2026 포스터 발표.<br>CVPR 2026 Workshop 준비.</div>
+                    </div>
+                    <div class="item-year">2025 &ndash; 현재</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 발표 -->
+        <section>
+            <h2>발표</h2>
+            <ul class="item-list">
+                <li>
+                    <div>
+                        <div class="item-title">포스터: 배포된 객체 탐지 모델에서 입력 섭동을 이용한 공정성 개선 기법</div>
+                        <div class="item-desc">IPIU 2026 (제38회 영상처리 및 이해에 관한 워크샵), 강릉</div>
+                    </div>
+                    <div class="item-year">2026.02</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="item-title">대표 연사: Gemini API를 활용한 해커톤</div>
+                        <div class="item-desc">Build with AI, 9개 대학 연합 행사 (약 100명 참가).<br>핸즈온 세션 메인 진행.</div>
+                    </div>
+                    <div class="item-year">2025</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 자격증 -->
+        <section>
+            <h2>자격증</h2>
+            <ul class="item-list">
+                <li>
+                    <div>
+                        <div class="item-title"><a href="certificate.pdf" target="_blank">GDGoC Lead Organizer &mdash; Certificate of Participation</a></div>
+                        <div class="item-desc">Google Developer Relations (2024&ndash;2025 Academic Year)</div>
+                    </div>
+                    <div class="item-year">2025</div>
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            &copy; 2026 이도형. 최종 업데이트: 2026년 2월.
+        </footer>
+    </div>
+</body>
+</html>
